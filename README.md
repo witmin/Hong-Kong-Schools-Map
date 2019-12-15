@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# Use Mapbox GL JS in a React app
+This project follows the tutorial from Mapbox Doc to set up a Map in Mapbox GL JS. 
+[https://docs.mapbox.com/help/tutorials/use-mapbox-gl-js-with-react/#getting-started](https://docs.mapbox.com/help/tutorials/use-mapbox-gl-js-with-react/#getting-started)
+
 ## Available Scripts
 
 In the project directory, you can run:
