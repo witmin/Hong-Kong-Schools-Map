@@ -24,11 +24,21 @@ class App extends React.Component {
             zoom: this.state.zoom
         });
 
+        map.on('move', ()=> {
+            this.setState({
+                lng: map.getCenter().lng.toFixed(4),
+                lat: map.getCenter().lat.toFixed(4),
+                zoom: map.getZoom().toFixed(2)
+            })
+        });
+
     }
+
 
     render() {
         return (
             <div>
+                <div>Longitude: {this.state.lng} | Latitude: {this.state.lat}</div>
                 <div ref={el => this.mapContainer = el} className="mapContainer"/>
             </div>
         )
