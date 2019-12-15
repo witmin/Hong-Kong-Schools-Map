@@ -11,7 +11,7 @@ class App extends React.Component {
         super(props);
         this.state = {
             lng: 103,
-            lat: 35,
+            lat: 34,
             zoom: 4
         }
     }
@@ -33,7 +33,6 @@ class App extends React.Component {
         });
 
     }
-
 
     render() {
         return (
