@@ -58,8 +58,8 @@ a {
 .marker {
     background-image: url('/images/pin.svg');
     background-size: auto 100%;
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
     cursor: pointer;
 }
 
