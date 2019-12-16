@@ -6,8 +6,6 @@ import './index.css';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_PERSONAL_ACCESS_TOKEN;
 
-let hoveredStateId = null;
-
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -71,6 +69,7 @@ class App extends React.Component {
             <div>
                 <div className="sidebarStyle">Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom: {this.state.zoom}</div>
                 <div ref={el => this.mapContainer = el} className="mapContainer"/>
+
             </div>
         )
     }
