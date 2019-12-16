@@ -88,7 +88,6 @@ a {
 .mapboxgl-popup-content {
     font-size: 1rem;
     border-radius: 4px;
-    min-width: 320px;
     padding: 1rem 1.25rem;
 }
 
@@ -99,14 +98,6 @@ a {
 .mapboxgl-popup p {
     color: #404040;
 }
-
-/*.mapboxgl-popup p.meta {*/
-/*    color: #666;*/
-/*}*/
-/*.mapboxgl-popup p.meta .divider {*/
-/*    color: #efefef;*/
-/*    margin: 0 .2rem;*/
-/*}*/
 
 .mapboxgl-popup a {
     color: orange;
