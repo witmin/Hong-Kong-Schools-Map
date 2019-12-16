@@ -63,7 +63,11 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <div className="sidebarStyle">Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom: {this.state.zoom}</div>
+                <div className="app-info"><h1>香港學校位置 Hong Kong School Location Map</h1>
+                    <p>數據來源： <a href="https://data.gov.hk/sc-data/dataset/hk-edb-schinfo-school-location-and-information" rel="noreferrer noopenner">data.gov.hk</a>
+                    </p>
+                    {/*<p>Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom: {this.state.zoom}</p>*/}
+                </div>
                 <div ref={el => this.mapContainer = el} className="mapContainer"/>
             </div>
         )

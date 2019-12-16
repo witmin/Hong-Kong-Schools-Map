@@ -4,20 +4,39 @@
 }
 
 body {
-    font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+    font-family: -apple-system, "PingFang TC", "Helvetica Neue", Arial, sans-serif;
     font-size: 16px;
     font-weight: normal;
 }
 
-.sidebarStyle {
+h1 {
+    font-size: .875rem;
+    line-height: 1;
+    margin: 0.25rem 0 .5rem;
+    font-weight: normal;
+}
+
+p {
+    line-height: 1.5;
+    font-size: .75rem;
+    color: #cde3ee;
+}
+
+a {
+    color: #cde3ee;
+    text-decoration: none;
+}
+
+.app-info {
     display: block;
     position: absolute;
     top: 0;
-    right: 0;
-    margin: .75rem;
+    left: 0;
+    width: 100%;
+    margin: 0;
     padding: .5rem .75rem;
-    background-color: #7A766E;
-    color: #efefef;
+    background-color: #2d3640;
+    color: #ffffff;
     z-index: 1 !important;
     box-sizing: border-box;
 }
@@ -33,9 +52,9 @@ body {
 }
 
 .marker {
-  background-image: url('/images/school-solid.svg');
-  background-size: cover;
-  width: 32px;
-  height: 32px;
-  cursor: pointer;
+    background-image: url('/images/school-solid.svg');
+    background-size: cover;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
 }
