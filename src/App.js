@@ -101,7 +101,7 @@ ${marker.properties["宗教"]}
     render() {
         return (
             <div>
-                <div className="app-info"><h1>香港學校位置地圖 Hong Kong School Location Map</h1>
+                <div className="app-info"><h1>香港學校位置及资料地圖 Hong Kong School Location and Profile Map</h1>
                     <p>數據來源： <a href="https://data.gov.hk/sc-data/dataset/hk-edb-schinfo-school-location-and-information" rel="noreferrer noopenner">data.gov.hk</a>
                     </p>{/*<p>Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom: {this.state.zoom}</p>*/}
                 </div>
