@@ -5,9 +5,16 @@ The master branch used the [Hong Kong Schools location data](https://data.gov.hk
 
 The branch 'province-layer-of-china' loads the map of China in the center with a layer of provinces. 
 
+
+## Demo
+[https://hk-schools-map.millielin.com](https://hk-schools-map.millielin.com)
+
 ## Use Mapbox GL JS in a React app
 This project follows the tutorial from Mapbox Doc to set up a Map in Mapbox GL JS. 
 [https://docs.mapbox.com/help/tutorials/use-mapbox-gl-js-with-react/#getting-started](https://docs.mapbox.com/help/tutorials/use-mapbox-gl-js-with-react/#getting-started)
+
+### GEOJSON file converting tool
+[http://www.convertcsv.com/csv-to-geojson.htm](http://www.convertcsv.com/csv-to-geojson.htm)
 
 ## Available Scripts
 

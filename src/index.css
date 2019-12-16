@@ -56,9 +56,28 @@ a {
 }
 
 .marker {
-    background-image: url('/images/school-solid.svg');
-    background-size: cover;
-    width: 32px;
-    height: 32px;
+    background-image: url('/images/pin.svg');
+    background-size: auto 100%;
+    width: 28px;
+    height: 28px;
     cursor: pointer;
+}
+
+/* Popup card */
+.mapboxgl-popup-content {
+    padding: 1rem;
+}
+.mapboxgl-popup-content {
+    font-size: 1rem;
+    border-radius: 4px;
+}
+.mapboxgl-popup p{
+    color: #404040;
+}
+.mapboxgl-popup a {
+    color: orange;
+}
+.mapboxgl-popup-close-button {
+    font-size: 1.25rem;
+    padding: 0 .5rem;
 }
