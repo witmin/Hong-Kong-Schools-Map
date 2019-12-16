@@ -1,6 +1,5 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl';
-
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './index.css';
 
@@ -25,6 +24,8 @@ class App extends React.Component {
             zoom: this.state.zoom,
         });
 
+        const schools = ('./data/hk-school-loc-2019.geojson');
+
         map.on('move', () => {
             this.setState({
                 lng: map.getCenter().lng.toFixed(4),
@@ -33,15 +34,10 @@ class App extends React.Component {
             });
         });
 
-        // map.loadImage('./images/school-solid.svg', function(error, image) {
-        //
-        // });
-
         map.on('load', function () {
             map.addSource('hk-schools-loc', {
                 'type': 'geojson',
-                'data':
-                    './data/hk-school-loc-2019.json'
+                'data': schools,
             });
 
             map.addLayer({
@@ -50,18 +46,18 @@ class App extends React.Component {
                 'source': 'hk-schools-loc',
                 'layout': {
                     // get the icon name from the source's "icon" property
-// concatenate the name to get an icon from the style's sprite sheet
+                    // concatenate the name to get an icon from the style's sprite sheet
                     'icon-image': ['concat', 'school', '-15'],
-// get the title name from the source's "title" property
+                    'icon-allow-overlap': false,
+                    // get the title name from the source's "title" property
                     'text-field': ['get', '中文名稱'],
                     'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+                    'text-size': 12,
                     'text-offset': [0, 0.6],
                     'text-anchor': 'top'
                 }
             });
-
         });
-
     }
 
     render() {
@@ -69,7 +65,6 @@ class App extends React.Component {
             <div>
                 <div className="sidebarStyle">Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom: {this.state.zoom}</div>
                 <div ref={el => this.mapContainer = el} className="mapContainer"/>
-
             </div>
         )
     }

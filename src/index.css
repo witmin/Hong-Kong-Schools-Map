@@ -13,7 +13,7 @@ body {
     display: block;
     position: absolute;
     top: 0;
-    left: 0;
+    right: 0;
     margin: .75rem;
     padding: .5rem .75rem;
     background-color: #7A766E;
@@ -30,4 +30,12 @@ body {
     bottom: 0;
     width: 100vw;
     height: 100vh;
+}
+
+.marker {
+  background-image: url('/images/school-solid.svg');
+  background-size: cover;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
 }
