@@ -12,9 +12,10 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            lng: 103,
-            lat: 34,
-            zoom: 4,
+            // Hong Kong
+            lng: 114.1441,
+            lat: 22.3750,
+            zoom: 10.5,
         }
     }
 
@@ -34,71 +35,33 @@ class App extends React.Component {
             });
         });
 
+        // map.loadImage('./images/school-solid.svg', function(error, image) {
+        //
+        // });
+
         map.on('load', function () {
-            map.addSource('states', {
+            map.addSource('hk-schools-loc', {
                 'type': 'geojson',
                 'data':
-                    'https://raw.githubusercontent.com/waylau/svg-china-map/master/china-map/china.geo.json'
-            });
-
-// The feature-state dependent fill-opacity expression will render the hover effect
-// when a feature's hover state is set to true.
-            map.addLayer({
-                'id': 'state-fills',
-                'type': 'fill',
-                'source': 'states',
-                'layout': {},
-                'paint': {
-                    'fill-color': '#627BC1',
-                    'fill-opacity': [
-                        'case',
-                        ['boolean', ['feature-state', 'hover'], false],
-                        1,
-                        0.5
-                    ]
-                }
+                    './data/hk-school-loc-2019.json'
             });
 
             map.addLayer({
-                'id': 'state-borders',
-                'type': 'line',
-                'source': 'states',
-                'layout': {},
-                'paint': {
-                    'line-color': '#627BC1',
-                    'line-width': 2
+                'id': 'school-location-points',
+                'type': 'symbol',
+                'source': 'hk-schools-loc',
+                'layout': {
+                    // get the icon name from the source's "icon" property
+// concatenate the name to get an icon from the style's sprite sheet
+                    'icon-image': ['concat', 'school', '-15'],
+// get the title name from the source's "title" property
+                    'text-field': ['get', '中文名稱'],
+                    'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+                    'text-offset': [0, 0.6],
+                    'text-anchor': 'top'
                 }
             });
 
-// When the user moves their mouse over the state-fill layer, we'll update the
-// feature state for the feature under the mouse.
-            map.on('mousemove', 'state-fills', function (e) {
-                if (e.features.length > 0) {
-                    if (hoveredStateId) {
-                        map.setFeatureState(
-                            {source: 'states', id: hoveredStateId},
-                            {hover: false}
-                        );
-                    }
-                    hoveredStateId = e.features[0].id;
-                    map.setFeatureState(
-                        {source: 'states', id: hoveredStateId},
-                        {hover: true}
-                    );
-                }
-            });
-
-// When the mouse leaves the state-fill layer, update the feature state of the
-// previously hovered feature.
-            map.on('mouseleave', 'state-fills', function () {
-                if (hoveredStateId) {
-                    map.setFeatureState(
-                        {source: 'states', id: hoveredStateId},
-                        {hover: false}
-                    );
-                }
-                hoveredStateId = null;
-            });
         });
 
     }
