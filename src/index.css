@@ -10,7 +10,7 @@ body {
 }
 
 h1 {
-    font-size: .875rem;
+    font-size: 1rem;
     line-height: 1;
     margin: 0.25rem 0 .5rem;
     font-weight: normal;
@@ -19,11 +19,11 @@ h1 {
 p {
     line-height: 1.5;
     font-size: .75rem;
-    color: #cde3ee;
+    color: #ffffff;
 }
 
 a {
-    color: #cde3ee;
+    color: #ffffff;
     text-decoration: none;
 }
 
@@ -35,10 +35,14 @@ a {
     width: 100%;
     margin: 0;
     padding: .5rem .75rem;
-    background-color: #2d3640;
+    background-color: transparent;
     color: #ffffff;
     z-index: 1 !important;
     box-sizing: border-box;
+}
+
+.app-info * {
+    text-shadow: 0 2px 3px rgba(0, 0, 0, .4), 0 -2px 3px rgba(0, 0, 0, .4);
 }
 
 .mapContainer {
