@@ -5,7 +5,9 @@ import './index.css';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_PERSONAL_ACCESS_TOKEN;
 
-const geoJsonUrl = 'https://s3-ap-southeast-1.amazonaws.com/s.linminquan.com/millie/geojson.json';
+// const geoJsonUrl = 'https://s3-ap-southeast-1.amazonaws.com/s.linminquan.com/millie/geojson.json';
+
+const geoJsonUrl = 'https://hk-schools-map.millielin.com/geojson.json';
 
 class App extends Component {
     constructor(props) {
