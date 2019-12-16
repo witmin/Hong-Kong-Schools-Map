@@ -3,11 +3,9 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './index.css';
 
-import geoJson from './geojson';
-
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_PERSONAL_ACCESS_TOKEN;
 
-const features = geoJson['features'];
+const geoJsonUrl = 'https://s3-ap-southeast-1.amazonaws.com/s.linminquan.com/millie/geojson.json';
 
 class App extends Component {
     constructor(props) {
@@ -17,19 +15,30 @@ class App extends Component {
             lng: 114.1441,
             lat: 22.3750,
             zoom: 11,
+            features: [],
+            isLoading: false,
         }
     }
 
     componentDidMount() {
+        this.setState({
+            isLoading: true,
+            features: [],
+        });
+
+        fetch(geoJsonUrl)
+            .then(response => response.json())
+            .then(data => {
+                this.setState({features: data['features'], isLoading: false});
+            });
+
         const map = new mapboxgl.Map({
             container: this.mapContainer,
-            // style: 'mapbox://styles/witmin/ck46v5ez92o7r1cmml0s0svky',
             style: 'mapbox://styles/witmin/ck48aqhzz0jjb1cny8q4qjrfp',
             center: [this.state.lng, this.state.lat],
             zoom: this.state.zoom,
         });
 
-        // const schools = ('./data/hk-school-loc-2019.json');
 
         map.on('move', () => {
             this.setState({
@@ -39,10 +48,15 @@ class App extends Component {
             });
         });
 
-        map.on('load', function () {
+        map.on('load', () => {
+            this.setState(
+                {
+                    features: this.state.features,
+                }
+            );
             map.addSource('hk-schools-loc', {
                 'type': 'geojson',
-                'data': geoJson,
+                'data': geoJsonUrl,
             });
 
             map.addLayer({
@@ -66,18 +80,23 @@ class App extends Component {
                 }
             });
 
-            // Marker
-            features.forEach(function (marker) {
-                // create a HTML element for each feature
-                let el = document.createElement('div');
-                el.className = 'marker';
+            this.loadMarkers(this.state.features, map);
+        });
+    }
 
-                // make a marker for each feature and add to the map
-                new mapboxgl.Marker(el)
-                    .setLngLat(marker.geometry.coordinates)
-                    .setPopup(new mapboxgl.Popup({offset: 25}) // add popups
-                        .setMaxWidth('640px')
-                        .setHTML(`
+    // Marker
+    loadMarkers = (features, map) => {
+        features.forEach(function (marker) {
+            // create a HTML element for each feature
+            let el = document.createElement('div');
+            el.className = 'marker';
+
+            // make a marker for each feature and add to the map
+            new mapboxgl.Marker(el)
+                .setLngLat(marker.geometry.coordinates)
+                .setPopup(new mapboxgl.Popup({offset: 25}) // add popups
+                    .setMaxWidth('640px')
+                    .setHTML(`
 <span class="district tag">${marker.properties["分區"]} </span>
 <span class="finance tag">${marker.properties["資助種類"]}</span>
 <span class="school-level tag">${marker.properties["學校類型"]} </span>
@@ -87,27 +106,29 @@ class App extends Component {
                             ${marker.properties["學校授課時間"]}
                              <span class="divider">|</span>
 ${marker.properties["就讀學生性別"]} <span class="divider">|</span>
-${marker.properties["宗教"]} 
+${marker.properties["宗教"]}
                             </p>
                             <p class="contact">聯絡電話: ${marker.properties["聯絡電話"]}</p>
                             <p class="contact">傳真號碼: ${marker.properties["傳真號碼"]}</p>
                             <p class="contact">網頁: <a href='${marker.properties["網頁"]}' target="_blank" rel="noreferrer noopenner">${marker.properties["網頁"]}</a></p>
                         `))
-                    .addTo(map);
-            });
+                .addTo(map);
         });
-    }
+
+    };
 
     render() {
+        const {isLoading} = this.state;
         return (
             <div>
-                <div className="app-info"><h1>香港學校位置及资料地圖 Hong Kong School Location and Profile Map</h1>
-                    <p>數據來源： <a href="https://data.gov.hk/sc-data/dataset/hk-edb-schinfo-school-location-and-information" rel="noreferrer noopenner">data.gov.hk</a>
-                    </p>{/*<p>Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom: {this.state.zoom}</p>*/}
-                </div>
-
+                {isLoading ? <div className="is-loading">正在加載數據...</div> : (
+                    <div className="app-info"><h1>香港學校位置及资料地圖 Hong Kong School Location and Profile Map</h1>
+                        <p>數據來源： <a href="https://data.gov.hk/sc-data/dataset/hk-edb-schinfo-school-location-and-information" rel="noreferrer noopenner">data.gov.hk</a>
+                        </p>{/*<p>Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom: {this.state.zoom}</p>*/}
+                    </div>
+                )
+                }
                 <div ref={el => this.mapContainer = el} className="mapContainer"/>
-
 
             </div>
         )
