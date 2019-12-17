@@ -108,7 +108,7 @@ class App extends Component {
                             ${marker.properties["學校授課時間"]}
                              <span class="divider">|</span>
 ${marker.properties["就讀學生性別"]} <span class="divider">|</span>
-${marker.properties["宗教"]}
+宗教：${marker.properties["宗教"]}
                             </p>
                             <p class="contact">聯絡電話: ${marker.properties["聯絡電話"]}</p>
                             <p class="contact">傳真號碼: ${marker.properties["傳真號碼"]}</p>
