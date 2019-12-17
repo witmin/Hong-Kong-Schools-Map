@@ -18,6 +18,8 @@ $meta-text-color: $grey;
 $link: $deep-blue;
 $link-hover-color: darken($deep-blue, 5%);
 
+$line-height: 1.5;
+
 // Custom styles
 * {
   margin: 0;
@@ -28,6 +30,7 @@ body {
   font-family: -apple-system, "PingFang TC", "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   font-weight: normal;
+  line-height: $line-height;
 
   [lang="en"] {
     font-family: "Lucida Grande", "Roboto", "Helvetica Neue", Arial, sans-serif;
@@ -72,7 +75,6 @@ body {
 
   h1 {
     font-size: $size-5;
-    line-height: 1.5;
     margin: 0.25rem 0;
     font-weight: normal;
 
@@ -83,7 +85,6 @@ body {
   }
 
   p {
-    line-height: 1.5;
     font-size: $size-7;
     color: $meta-text-color;
   }
@@ -132,6 +133,7 @@ body {
   }
 
   p {
+    font-size: $size-6;
     color: $meta-text-color;
   }
 
