@@ -1,0 +1,152 @@
+// Variables
+// Colors
+$deep-blue: #536580;
+$grey-dark: #43433f;
+$grey: #6a6a64;
+
+// Font size
+$size-3: 1.25rem;
+$size-5: 1rem;
+$size-6: .875rem;
+$size-7: .75rem;
+
+// Headings
+$heading-text-color: $grey-dark;
+$meta-text-color: $grey;
+
+// Link
+$link: $deep-blue;
+$link-hover-color: darken($deep-blue, 5%);
+
+// Custom styles
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, "PingFang TC", "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+
+  [lang="en"] {
+    font-family: "Lucida Grande", "Roboto", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+.is-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  color: $deep-blue;
+  padding-top: 22%;
+  text-shadow: 0 2px 3px rgba(255, 255, 255, .4);
+  background: rgba(255, 255, 255, .6);
+  font-size: 1.5rem;
+  z-index: 99999;
+}
+
+
+.app-info {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  padding: .5rem .75rem;
+  background-color: transparent;
+  color: $heading-text-color;
+  z-index: 1 !important;
+  box-sizing: border-box;
+
+  * {
+    text-shadow: 0 2px 3px rgba(255, 255, 255, .6), 0 -2px 3px rgba(255, 255, 255, .6);
+  }
+
+  h1 {
+    font-size: $size-5;
+    line-height: 1.5;
+    margin: 0.25rem 0;
+    font-weight: normal;
+
+    [lang="en"] {
+      display: block;
+      font-size: $size-6;
+    }
+  }
+
+  p {
+    line-height: 1.5;
+    font-size: $size-7;
+    color: $meta-text-color;
+  }
+
+  a {
+    color: $link;
+    text-decoration: none;
+
+    &:hover, &:focus {
+      color: $link-hover-color;
+      text-decoration: underline;
+    }
+  }
+}
+
+
+.mapContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.marker {
+  background-image: url('/images/pin.svg');
+  background-size: auto 100%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+/* Popup card */
+.mapboxgl-popup-content {
+  font-size: $size-5;
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+}
+
+.mapboxgl-popup {
+  h3 {
+    color: $heading-text-color;
+    margin: .5rem 0;
+  }
+
+  p {
+    color: $meta-text-color;
+  }
+
+  a {
+    color: $link;
+    text-decoration: none;
+
+    &:hover, &:focus {
+      color: $link-hover-color;
+      text-decoration: underline;
+    }
+  }
+}
+
+.mapboxgl-popup-close-button {
+  font-size: 1.25rem;
+  padding: 0 .5rem;
+}
