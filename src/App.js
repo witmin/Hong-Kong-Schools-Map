@@ -5,8 +5,6 @@ import './index.scss';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_PERSONAL_ACCESS_TOKEN;
 
-// const geoJsonUrl = 'https://s3-ap-southeast-1.amazonaws.com/s.linminquan.com/millie/geojson.json';
-
 const geoJsonUrl = 'https://hk-schools-map.millielin.com/geojson.json';
 
 class App extends Component {
@@ -61,15 +59,21 @@ class App extends Component {
                 'data': geoJsonUrl,
             });
 
+            map.loadImage('/images/pin.png',
+                function (error, image) {
+                    if (error) throw error;
+                    map.addImage('pin', image);
+                }
+            );
             map.addLayer({
-                'id': 'school-location-points',
+                'id': 'schools',
                 'type': 'symbol',
                 'source': 'hk-schools-loc',
                 'layout': {
-                    // get the icon name from the source's "icon" property
                     // concatenate the name to get an icon from the style's sprite sheet
-                    // 'icon-image': ['concat', 'school', '-15'],
-                    'icon-allow-overlap': false,
+                    'icon-image': ['concat', 'pin'],
+                    'icon-size': 0.5,
+                    'icon-allow-overlap': true,
                     // get the title name from the source's "title" property
                     'text-field': ['get', '中文名稱'],
                     'text-font': ['Open Sans Regular', 'Arial Unicode MS Regular'],
@@ -81,24 +85,14 @@ class App extends Component {
                     'text-color': "#565656",
                 }
             });
-
-            this.loadMarkers(this.state.features, map);
         });
-    }
 
-    // Marker
-    loadMarkers = (features, map) => {
-        features.forEach(function (marker) {
-            // create a HTML element for each feature
-            let el = document.createElement('div');
-            el.className = 'marker';
-
-            // make a marker for each feature and add to the map
-            new mapboxgl.Marker(el)
-                .setLngLat(marker.geometry.coordinates)
-                .setPopup(new mapboxgl.Popup({offset: 25}) // add popups
-                    .setMaxWidth('640px')
-                    .setHTML(`
+        // When a click event occurs on a feature in the places layer, open a popup at the
+        // location of the feature, with description HTML from its properties.
+        map.on('click', 'schools', function (e) {
+            let coordinates = e.features[0].geometry.coordinates.slice();
+            let marker = e.features[0];
+            let popupHtml = `
 <span class="district tag">${marker.properties["分區"]} </span>
 <span class="finance tag">${marker.properties["資助種類"]}</span>
 <span class="school-level tag">${marker.properties["學校類型"]} </span>
@@ -113,18 +107,40 @@ ${marker.properties["就讀學生性別"]} <span class="divider">|</span>
                             <p class="contact">聯絡電話: ${marker.properties["聯絡電話"]}</p>
                             <p class="contact">傳真號碼: ${marker.properties["傳真號碼"]}</p>
                             <p class="contact">網頁: <a href='${marker.properties["網頁"]}' target="_blank" rel="noreferrer noopenner">${marker.properties["網頁"]}</a></p>
-                        `))
+                        `;
+
+            // Ensure that if the map is zoomed out such that multiple
+            // copies of the feature are visible, the popup appears
+            // over the copy being pointed to.
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+
+            new mapboxgl.Popup()
+                .setLngLat(coordinates)
+                .setHTML(popupHtml)
                 .addTo(map);
         });
 
-    };
+        // Change the cursor to a pointer when the mouse is over the places layer.
+        map.on('mouseenter', 'schools', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'schools', function () {
+            map.getCanvas().style.cursor = '';
+        });
+    }
 
     render() {
         const {isLoading} = this.state;
         return (
             <div>
                 {isLoading ? <div className="is-loading">正在加載數據...</div> : (
-                    <div className="app-info"><h1><span lang="zh-hant">香港學校位置及资料地圖</span><span className="lang-en" lang="en">Hong Kong School Location and Profile Map</span></h1>
+                    <div className="app-info"><h1>
+                        <span lang="zh-hant">香港學校位置及资料地圖</span><span className="lang-en" lang="en">Hong Kong School Location and Profile Map</span>
+                    </h1>
                         <p>數據來源： <a href="https://data.gov.hk/sc-data/dataset/hk-edb-schinfo-school-location-and-information" rel="noreferrer noopenner">data.gov.hk</a>
                         </p>{/*<p>Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom: {this.state.zoom}</p>*/}
                     </div>
