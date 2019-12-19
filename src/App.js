@@ -140,7 +140,7 @@ ${marker.properties["就讀學生性別"]} <span class="divider">|</span>
                     <div className="app-info"><h1>
                         <span lang="zh-hant">香港學校位置及资料地圖</span><span className="lang-en" lang="en">Hong Kong School Location and Profile Map</span>
                     </h1>
-                        <p>Source： <a href="https://data.gov.hk/sc-data/dataset/hk-edb-schinfo-school-location-and-information" rel="noopener noreferrer">data.gov.hk</a>, Created by <a href="https://www.millielin.com" rel="noopener noreferrer">Millie Lin</a>
+                        <p>Source: <a href="https://data.gov.hk/sc-data/dataset/hk-edb-schinfo-school-location-and-information" rel="noopener noreferrer">data.gov.hk</a>, created by <a href="https://www.millielin.com" rel="noopener noreferrer">Millie Lin</a>
                         </p>{/*<p>Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom: {this.state.zoom}</p>*/}
                     </div>
                 )
