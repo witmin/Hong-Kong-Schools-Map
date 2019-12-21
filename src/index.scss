@@ -1,8 +1,8 @@
 // Variables
 // Colors
 $deep-blue: #536580;
-$grey-dark: #43433f;
-$grey: #6a6a64;
+$grey-dark: #2b3441;
+$grey: #545d6a;
 
 // Font size
 $size-3: 1.25rem;
@@ -19,6 +19,7 @@ $link: $deep-blue;
 $link-hover-color: darken($deep-blue, 5%);
 
 $line-height: 1.5;
+$line-height-small: 1.2;
 
 // Custom styles
 * {
@@ -31,11 +32,6 @@ body {
   font-size: 16px;
   font-weight: normal;
   line-height: $line-height;
-
-  [lang="en"] {
-    font-family: "Lucida Grande", "Roboto", "Helvetica Neue", Arial, sans-serif;
-    letter-spacing: -0.02em;
-  }
 }
 
 .is-loading {
@@ -75,10 +71,10 @@ body {
 
   h1 {
     font-size: $size-5;
-    margin: 0.25rem 0;
+    margin: 0.2rem 0;
     font-weight: normal;
 
-    [lang="en"] {
+    .lang-en {
       display: block;
       font-size: $size-6;
     }
@@ -100,7 +96,39 @@ body {
   }
 }
 
+// Language toggle button
+.language-toggle-button {
+  position: absolute;
+  right: .75rem;
+  top: .5rem;
+  -webkit-appearance: none;
+  padding: 0.5rem .75rem;
+  color: $link;
+  background: #e5edff;
+  border: 0;
+  border-radius: 4px;
+  text-shadow: none;
+  font-size: $size-7;
 
+  &:hover, &:focus {
+    color: $link-hover-color;
+    background-color: white;
+  }
+}
+
+.wrapper[lang*="zh-"] {
+  [lang="en"] {
+    display: none;
+  }
+}
+
+.wrapper[lang="en"] {
+  [lang*="zh-"] {
+    display: none;
+  }
+}
+
+// Map container
 .mapContainer {
   position: absolute;
   top: 0;
@@ -124,17 +152,47 @@ body {
   font-size: $size-5;
   border-radius: 4px;
   padding: 1rem 1.25rem;
+  min-width: 240px;
+}
+
+[lang="en"] .mapboxgl-popup-content {
+  min-width: 280px;
 }
 
 .mapboxgl-popup {
+  .tag {
+    font-size: $size-6;
+    color: $meta-text-color;
+    line-height: $line-height-small;
+
+    &[lang="en"] {
+      font-size: $size-7;
+    }
+  }
+
   h3 {
     color: $heading-text-color;
     margin: .5rem 0;
+    text-transform: capitalize;
+    line-height: $line-height-small;
+
+    &[lang="en"] {
+      font-size: $size-6;
+    }
   }
 
   p {
     font-size: $size-6;
     color: $meta-text-color;
+    margin-bottom: .25rem;
+
+    &[lang="en"] {
+      font-size: $size-6;
+    }
+  }
+
+  .divider {
+    color: #efefef;
   }
 
   a {
@@ -146,58 +204,10 @@ body {
       text-decoration: underline;
     }
   }
+
 }
 
 .mapboxgl-popup-close-button {
   font-size: 1.25rem;
   padding: 0 .5rem;
-}
-
-// Filter menu
-.filter-group {
-font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-font-weight: 600;
-position: absolute;
-top: 10px;
-right: 10px;
-z-index: 1;
-border-radius: 3px;
-width: 120px;
-color: #fff;
-}
-
-.filter-group input[type='checkbox']:first-child + label {
-border-radius: 3px 3px 0 0;
-}
-
-.filter-group label:last-child {
-border-radius: 0 0 3px 3px;
-border: none;
-}
-
-.filter-group input[type='checkbox'] {
-display: none;
-}
-
-.filter-group input[type='checkbox'] + label {
-background-color: #3386c0;
-display: block;
-cursor: pointer;
-padding: 10px;
-border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-}
-
-.filter-group input[type='checkbox'] + label {
-background-color: #3386c0;
-text-transform: capitalize;
-}
-
-.filter-group input[type='checkbox'] + label:hover,
-.filter-group input[type='checkbox']:checked + label {
-background-color: #4ea0da;
-}
-
-.filter-group input[type='checkbox']:checked + label:before {
-content: '✔';
-margin-right: 5px;
 }

@@ -7,6 +7,7 @@ mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_PERSONAL_ACCESS_TOKEN;
 
 const geoJsonUrl = 'https://hk-schools-map.millielin.com/geojson.json';
 
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -17,8 +18,14 @@ class App extends Component {
             zoom: 11,
             features: [],
             isLoading: false,
-        }
+            isChinese: true,
+        };
+        this.onClickToggleLanguage = this.onClickToggleLanguage.bind(this);
     }
+
+    onClickToggleLanguage() {
+        this.setState({isChinese: !this.state.isChinese});
+    };
 
     componentDidMount() {
         this.setState({
@@ -37,7 +44,6 @@ class App extends Component {
             center: [this.state.lng, this.state.lat],
             zoom: this.state.zoom,
         });
-
 
         map.on('move', () => {
             this.setState({
@@ -64,6 +70,7 @@ class App extends Component {
                     map.addImage('pin', image);
                 }
             );
+
             map.addLayer({
                 'id': 'schools',
                 'type': 'symbol',
@@ -72,18 +79,22 @@ class App extends Component {
                     // concatenate the name to get an icon from the style's sprite sheet
                     'icon-image': ['concat', 'pin'],
                     'icon-size': 0.5,
-                    'icon-allow-overlap': true,
+                    'icon-allow-overlap': false,
                     // get the title name from the source's "title" property
-                    'text-field': ['get', '中文名稱'],
+                    'text-field': ['format',
+                        ['get', '中文名稱'], {'font-scale': 1},
+                        ['get', 'ENGLISH NAME'], {'font-scale': 0.8}],
                     'text-font': ['Open Sans Regular', 'Arial Unicode MS Regular'],
                     'text-size': 12,
                     'text-offset': [0, 1],
-                    'text-anchor': 'top'
+                    'text-anchor': 'top',
+
                 },
                 paint: {
                     'text-color': "#565656",
                 }
             });
+
         });
 
         // When a click event occurs on a feature in the places layer, open a popup at the
@@ -92,20 +103,31 @@ class App extends Component {
             let coordinates = e.features[0].geometry.coordinates.slice();
             let marker = e.features[0];
             let popupHtml = `
-<span class="district tag">${marker.properties["分區"]} </span>
-<span class="finance tag">${marker.properties["資助種類"]}</span>
-<span class="school-level tag">${marker.properties["學校類型"]} </span>
-                            <h3 class="school-title name-zh-hant"> ${marker.properties["中文名稱"]}</h3>
-                            <p class="address">${marker.properties["中文地址"]}</p>
-                            <p class="meta" >
+                            <span class="district tag" lang="zh-hant">${marker.properties["分區"]} </span>
+                            <span class="district tag" lang="en">${marker.properties["DISTRICT"]} </span>
+                            <span class="finance tag" lang="zh-hant">${marker.properties["資助種類"]}</span>
+                            <span class="finance tag" lang="en">${marker.properties["FINANCE TYPE"]}</span>
+                            <span class="school-level tag" lang="zh-hant">${marker.properties["學校類型"]} </span>
+                            <span class="school-level tag" lang="en">${marker.properties["ENGLISH CATEGORY"]} </span>
+                            <h3 class="school-title" lang="zh-hant"> ${marker.properties["中文名稱"]}</h3>
+                            <h3 class="school-title" lang="en"> ${marker.properties["ENGLISH NAME"]}</h3>
+                            <p class="address" lang="zh-hant">${marker.properties["中文地址"]}</p>
+                            <p class="address" lang="en">${marker.properties["ENGLISH ADDRESS"]}</p>
+                            <p class="meta" lang="zh-hant">
                             ${marker.properties["學校授課時間"]}
                              <span class="divider">|</span>
 ${marker.properties["就讀學生性別"]} <span class="divider">|</span>
 宗教：${marker.properties["宗教"]}
                             </p>
-                            <p class="contact">聯絡電話: ${marker.properties["聯絡電話"]}</p>
-                            <p class="contact">傳真號碼: ${marker.properties["傳真號碼"]}</p>
-                            <p class="contact">網頁: <a href='${marker.properties["網頁"]}' target="_blank" rel="noreferrer noopenner">${marker.properties["網頁"]}</a></p>
+                             <p class="meta" lang="en">
+                            ${marker.properties["SESSION"]}
+                             <span class="divider">|</span>
+${marker.properties["STUDENTS GENDER"]} <span class="divider">|</span>
+Religion: ${marker.properties["RELIGION"]}
+                            </p>
+                            <p class="contact"><span lang="zh-hant">聯絡電話</span><span lang="en">Phone</span>: ${marker.properties["聯絡電話"]}</p>
+                            <p class="contact"><span lang="zh-hant">傳真號碼</span><span lang="en">Fax</span>: ${marker.properties["傳真號碼"]}</p>
+                            <p class="contact"><span lang="zh-hant">網頁</span><span lang="en">Website</span>: <a href='${marker.properties["網頁"]}' target="_blank" rel="noreferrer noopenner">${marker.properties["網頁"]}</a></p>
                         `;
 
             // Ensure that if the map is zoomed out such that multiple
@@ -133,19 +155,25 @@ ${marker.properties["就讀學生性別"]} <span class="divider">|</span>
     }
 
     render() {
-        const {isLoading} = this.state;
+        const {isLoading, isChinese} = this.state;
         return (
-            <div>
+            <div className="wrapper" lang={isChinese ? 'zh-hant' : 'en'}>
                 {isLoading ? <div className="is-loading">正在加載數據 Loading...</div> : (
-                    <div className="app-info"><h1>
-                        <span lang="zh-hant">香港學校位置及资料地圖</span><span className="lang-en" lang="en">Hong Kong Schools Location and Profile Map</span>
-                    </h1>
-                        <p>Source: <a href="https://data.gov.hk/sc-data/dataset/hk-edb-schinfo-school-location-and-information" rel="noopener noreferrer">data.gov.hk</a>, created by <a href="https://www.millielin.com/playground/notes/2019-12-19-hk-schools-map-mapbox" rel="noopener noreferrer">Millie Lin</a>
+                    <div className="app-info">
+                        <h1>
+                            <span>香港學校位置及资料地圖</span><span className="lang-en">Hong Kong Schools Location and Profile Map</span>
+                        </h1>
+                        <p>
+                            <span lang="en">Source</span><span lang="zh-hant">數據來源</span>: <a href="https://data.gov.hk/sc-data/dataset/hk-edb-schinfo-school-location-and-information" rel="noopener noreferrer">data.gov.hk</a>, created by <a href="https://www.millielin.com/playground/notes/2019-12-19-hk-schools-map-mapbox" rel="noopener noreferrer">Millie Lin</a>
                         </p>{/*<p>Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom: {this.state.zoom}</p>*/}
+                        <p>
+                            <button type="button" className="language-toggle-button" onClick={() => this.onClickToggleLanguage()}>{isChinese ? 'English' : '中文'}</button>
+                        </p>
                     </div>
                 )
                 }
                 <div ref={el => this.mapContainer = el} className="mapContainer"/>
+
 
             </div>
         )
