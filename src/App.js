@@ -79,12 +79,16 @@ class App extends Component {
                     // concatenate the name to get an icon from the style's sprite sheet
                     'icon-image': ['concat', 'pin'],
                     'icon-size': 0.5,
-                    'icon-allow-overlap': true,
+                    'icon-allow-overlap': false,
                     // get the title name from the source's "title" property
                     'text-field': ['format',
-                        ['get', '中文名稱'], {'font-scale': 1,},
+                        ['get', '中文名稱'], {'font-scale': 1},
                         '\n', {},
                         ['get', 'ENGLISH NAME'], {'font-scale': 0.75}],
+                    // 'text-field': ['format',
+                    //     ['get', '中文名稱'], {'font-scale': 1,},
+                    //     '\n', {},
+                    //     ['get', 'ENGLISH NAME'], {'font-scale': 0.75}],
                     'text-font': ['Open Sans Regular', 'Arial Unicode MS Regular'],
                     'text-size': 12,
                     'text-offset': [0, 1.1],
