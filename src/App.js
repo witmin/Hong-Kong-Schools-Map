@@ -82,11 +82,13 @@ class App extends Component {
                     'icon-allow-overlap': false,
                     // get the title name from the source's "title" property
                     'text-field': ['format',
-                        ['get', '中文名稱'], {'font-scale': 1},
-                        ['get', 'ENGLISH NAME'], {'font-scale': 0.8}],
+                        ['get', '中文名稱'], {'font-scale': 1,},
+                        '\n',
+                        {},
+                        ['get', 'ENGLISH NAME'], {'font-scale': 0.75}],
                     'text-font': ['Open Sans Regular', 'Arial Unicode MS Regular'],
                     'text-size': 12,
-                    'text-offset': [0, 1],
+                    'text-offset': [0, 1.1],
                     'text-anchor': 'top',
 
                 },
