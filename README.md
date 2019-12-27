@@ -46,7 +46,7 @@ As this is an experimental data visualization project, I am happy that I have be
 
 One of the rendered map with all schools location appears at the same time looks like the image below:
 
-<figure>![The screenshot of the Hong Kong Schools Location and Profile Map](https://www.millielin.com/images/projects/hk-school-loc-map.png)</figure>
+![The screenshot of the Hong Kong Schools Location and Profile Map](https://www.millielin.com/images/projects/hk-school-loc-map.png)
 
 #### It is open sourced
 
