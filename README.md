@@ -21,7 +21,7 @@ This project follows the tutorial from Mapbox Doc to set up a Map in Mapbox GL J
 
 Here you go the screenshot:
 
-![The screenshot of the Hong Kong Schools Location and Profile Map](https://www.millielin.com/images/content/hk-schools-map-800.png)
+![The screenshot of the Hong Kong Schools Location and Profile Map](https://www.millielin.com/static/3dab90b4efd28f8a150a589523a7550f/5a190/hk-schools-map-800.png)
 
 #### The idea and the data
 
