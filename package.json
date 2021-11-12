@@ -7,10 +7,9 @@
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.1.2",
     "mapbox-gl": "^1.6.0",
-    "node-sass": "^4.13.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-scripts": "3.3.0"
+    "react-scripts": "^3.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -34,6 +33,7 @@
     ]
   },
   "devDependencies": {
-    "json-loader": "^0.5.7"
+    "json-loader": "^0.5.7",
+    "sass": "^1.43.4"
   }
 }
