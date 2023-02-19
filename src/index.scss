@@ -1,8 +1,8 @@
 // Variables
 // Colors
-$deep-blue: #536580;
-$grey-dark: #2b3441;
-$grey: #545d6a;
+$deep-blue: #4c2a86;
+$grey-dark: #131013;
+$grey: #231d23;
 
 // Font size
 $size-3: 1.25rem;
@@ -66,13 +66,13 @@ body {
   box-sizing: border-box;
 
   * {
-    text-shadow: 0 2px 2px rgba(255, 255, 255, 1), 0 -2px 2px rgba(255, 255, 255, 1);
+    text-shadow: 0 1px 0 #fff, 0 0 0 #fff;
   }
 
   h1 {
     font-size: $size-5;
     margin: 0.2rem 0;
-    font-weight: normal;
+    font-weight: bold;
 
     .lang-en {
       display: block;
