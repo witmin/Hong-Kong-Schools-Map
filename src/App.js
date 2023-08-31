@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import mapboxgl from '!mapbox-gl';
+import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './index.scss';
 
@@ -39,10 +39,10 @@ class App extends Component {
             });
 
         const map = new mapboxgl.Map({
-            container: this.mapContainer,
-            style: 'mapbox://styles/witmin/ck48aqhzz0jjb1cny8q4qjrfp',
-            center: [this.state.lng, this.state.lat],
-            zoom: this.state.zoom,
+            container: this.mapContainer, // container ID
+            style: 'mmapbox://styles/witmin/ck48aqhzz0jjb1cny8q4qjrfp', // style URL
+            center: [this.state.lng, this.state.lat], // starting position [lng, lat]
+            zoom: this.state.zoom, // starting zoom
         });
 
         map.on('move', () => {
@@ -169,7 +169,8 @@ Religion: ${marker.properties["RELIGION"]}
                             <span>香港學校位置及资料地圖</span><span className="lang-en">Hong Kong Schools Location and Profile Map</span>
                         </h1>
                         <p>
-                            <span lang="en">Source:</span><span lang="zh-hant">數據來源：</span> <a href="https://data.gov.hk/sc-data/dataset/hk-edb-schinfo-school-location-and-information" rel="noopener noreferrer">data.gov.hk</a>, <span lang="en">Data version:</span><span lang="zh-hant">數據版本：</span><span>31/08/2023</span>. Created by <a href="https://www.millielin.com/blog/2019-12-23-hk-school-loc-map/" rel="noopener noreferrer">Millie Lin</a>
+                            <span lang="en">Source:</span><span lang="zh-hant">數據來源：</span>
+                            <a href="https://data.gov.hk/sc-data/dataset/hk-edb-schinfo-school-location-and-information" rel="noopener noreferrer">data.gov.hk</a>, <span lang="en">Data version:</span><span lang="zh-hant">數據版本：</span><span>31/08/2023</span>. Created by <a href="https://www.millielin.com/blog/2019-12-23-hk-school-loc-map/" rel="noopener noreferrer">Millie Lin</a>
                         </p>{/*<p>Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom: {this.state.zoom}</p>*/}
                         <p>
                             <button type="button" className="language-toggle-button" onClick={() => this.onClickToggleLanguage()}>{isChinese ? 'English' : '中文'}</button>
