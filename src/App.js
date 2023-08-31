@@ -43,7 +43,7 @@ class App extends Component {
 
         const map = new mapboxgl.Map({
             container: this.mapContainer, // container ID
-            style: 'mmapbox://styles/witmin/ck48aqhzz0jjb1cny8q4qjrfp', // style URL
+            style: 'mapbox://styles/witmin/ck48aqhzz0jjb1cny8q4qjrfp', // style URL
             center: [this.state.lng, this.state.lat], // starting position [lng, lat]
             zoom: this.state.zoom, // starting zoom
         });
