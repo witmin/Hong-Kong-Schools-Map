@@ -5,7 +5,7 @@ import './index.scss';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_PERSONAL_ACCESS_TOKEN;
 
-const geoJsonUrl = 'https://hk-schools-map.millielin.com/geojson.json';
+const geoJsonUrl = 'https://hk-schools-map.millielin.com/geodata.json';
 
 
 class App extends Component {
