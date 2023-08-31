@@ -21,7 +21,7 @@
     "extends": "react-app"
   },
   "browserslist": {
-     "production": [
+    "production": [
       ">0.2%",
       "not dead",
       "not op_mini all",
@@ -39,6 +39,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.22.14",
     "json-loader": "^0.5.7",
-    "sass": "^1.66.1"
-  },
+    "sass": "^1.66.1",
+    "worker-loader": "^3.0.8"
+  }
 }
