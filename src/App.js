@@ -173,7 +173,7 @@ Religion: ${marker.properties["RELIGION"]}
                         </h1>
                         <p>
                             <span lang="en">Source:</span><span lang="zh-hant">數據來源：</span>
-                            <a href="https://data.gov.hk/sc-data/dataset/hk-edb-schinfo-school-location-and-information" rel="noopener noreferrer">data.gov.hk</a>, <span lang="en">Data version:</span><span lang="zh-hant">數據版本：</span><span>31/08/2023</span>. Created by <a href="https://www.millielin.com/blog/2019-12-23-hk-school-loc-map/" rel="noopener noreferrer">Millie Lin</a>
+                            <a href="https://data.gov.hk/sc-data/dataset/hk-edb-schinfo-school-location-and-information" rel="noopener noreferrer">data.gov.hk</a>, <span lang="en">Data version:</span><span lang="zh-hant">數據版本：</span><span>31/08/2025</span>. Created by <a href="https://www.millielin.com/blog/2019-12-23-hk-school-loc-map/" rel="noopener noreferrer">Millie Lin</a>
                         </p>{/*<p>Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom: {this.state.zoom}</p>*/}
                         <p>
                             <button type="button" className="language-toggle-button" onClick={() => this.onClickToggleLanguage()}>{isChinese ? 'English' : '中文'}</button>
